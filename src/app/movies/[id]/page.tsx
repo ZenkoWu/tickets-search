@@ -26,8 +26,8 @@ const FilmDescription = (props: any) => {
     }
     // console.log(data)
     return ( 
-        <div>
-            <div className="backgroundTemplate d-flex gap-24 border">
+        <div className='d-flex flex-column gap-24'>
+            <div className="backgroundTemplate d-flex gap-24">
                 <img src={data.posterUrl} alt="" className={s.poster} />
 
                 <div className='d-flex flex-column gap-24'>

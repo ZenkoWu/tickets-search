@@ -32,7 +32,7 @@ const FilmDescription = (props: any) => {
                     <div className='mainInfo'>
                         <div className='d-flex justify-content-between' style={{marginBottom: '32px'}}>
                             <h2 className='fw-600'>{data.title}</h2>
-                            <ButtonGroup/>
+                            <ButtonGroup movieId={data.id}/>
                         </div>
 
                         <div className='d-flex flex-column gap-24 fs20'>

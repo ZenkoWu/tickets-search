@@ -4,8 +4,10 @@ import Button from "./Button/Button";
 import { cartActions } from "@/app/redux/features/cart";
 import { useCallback } from "react";
 
+import {selectProductAmount} from '../../redux/features/cart/selector'
+
 const ButtonGroup = ({movieId}: {movieId: string}) => {
-    let ticketCount = useSelector((state: any) => state.cart[movieId])
+    let ticketCount = useSelector((state: any) => state.cart.tickets[movieId])
     const dispatch = useDispatch()
 
     const addTicket = useCallback((movieId: string) => {
@@ -25,7 +27,7 @@ const ButtonGroup = ({movieId}: {movieId: string}) => {
                 isDisabled={!ticketCount}
                 onClick={() => removeTicket(movieId)}
             />
-            <p style={{padding: '0 5px', color: 'black'}}>{ticketCount ?? 0}</p>
+            <p className='fw-600' style={{padding: '0 8px', color: 'black'}}>{ticketCount ?? 0}</p>
             <Button 
                 src='plus.svg'
                 isDisabled={ticketCount === 30}

@@ -9,14 +9,14 @@ type TButton = {
 
 const Button = ({src, isDisabled, onClick}: TButton) => {
     return (
-        <div 
-            className={`${s.button} ${isDisabled && s.disabled}`}
+        <div  
+            className={`orange-button ${s.button} ${isDisabled && s.disabled}`}
             onClick={()=> !isDisabled && onClick()}
         >
         <Image
             className={!isDisabled ? 'pointer' : ''}
             src={src}
-            alt='button'
+            alt='button'    
             width={12}
             height={12}
             priority

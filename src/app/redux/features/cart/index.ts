@@ -1,6 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
+    tickets: {},
+    ticketsCount: 0
 }
 
 const cartSlice = createSlice({
@@ -8,21 +10,26 @@ const cartSlice = createSlice({
     initialState, 
     reducers: {
         increment: (state: any, {payload}: {payload: any}) => {
-            const count = state[payload] || 0;
-            state[payload] = count + 1
-            return state;
+            const count = state.tickets[payload] || 0;
+            state.tickets[payload] = count + 1;
+
+            ++state.ticketsCount
+            return;
         },
         decrement: (state: any, {payload}: {payload: any}) => {
-            const count = state[payload];
+            const count = state.tickets[payload];
             if(!count) {
                 return;
             }
             
             if(count === 1) {
-                delete state[payload]
+                delete state.tickets[payload]
+                --state.ticketsCount
                 return;
             }
-            state[payload] = count - 1
+            state.tickets[payload] = count - 1
+            --state.ticketsCount
+            return;
 
         },
         reset: () => initialState

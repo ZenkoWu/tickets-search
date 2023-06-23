@@ -1,0 +1,34 @@
+import { moviesActions } from "@/app/redux/features/movies"
+import { useGetMoviesQuery } from "@/app/redux/services/movieApi"
+import { useDispatch, useSelector } from "react-redux"
+import FilmCard from "../FilmCard/FilmCard"
+
+export const MovieList = () =>{ 
+    // let dispatch = useDispatch()
+    // let movies = useSelector((state) => state.movies)
+    let {data, isLoading, error} = useGetMoviesQuery()
+    console.log(data)
+
+    if(isLoading) {
+        return <div>Загрузка фильмов...</div>
+    }
+    if(!data || error) {
+        return <div>'Данные не найдены'</div>
+    }
+    //  else {
+    //     dispatch(moviesActions.getMovies(data))
+    // }
+
+    return (
+        <div style={{display:'flex', flexDirection:'column', gap:'20px'}}>
+            {
+                data && data.map((el, i) => 
+                    <FilmCard
+                        key={i}
+                        {...el}
+                    />
+                )
+            }     
+        </div>
+    )
+}

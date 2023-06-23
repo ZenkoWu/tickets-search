@@ -1,11 +1,20 @@
 import Image from "next/image";
 import s from './Button.module.css'
 
-const Button = ({src, isDisabled}: {src: string, isDisabled: boolean}) => {
+type TButton = {
+    src: string,
+    isDisabled: boolean,
+    onClick: () => void
+}
+
+const Button = ({src, isDisabled, onClick}: TButton) => {
     return (
-        <div className={`${s.button} ${isDisabled && s.disabled}`}>
+        <div 
+            className={`${s.button} ${isDisabled && s.disabled}`}
+            onClick={()=> !isDisabled && onClick()}
+        >
         <Image
-            className={`pointer`}
+            className={!isDisabled ? 'pointer' : ''}
             src={src}
             alt='button'
             width={12}

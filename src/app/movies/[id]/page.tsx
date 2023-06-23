@@ -1,8 +1,6 @@
 "use client";
-import { useSelector } from "react-redux";
-import {selectMovies} from '../../redux/features/movies/selector'
+
 import { useGetMovieQuery } from "@/app/redux/services/movieApi";
-import { useRouter } from "next/navigation";
 import s from './page.module.css'
 import ButtonGroup from "@/app/_components/ButtonGroup/ButtonGroup";
 import { Reviews } from "@/app/_components/Reviews/Reviews";

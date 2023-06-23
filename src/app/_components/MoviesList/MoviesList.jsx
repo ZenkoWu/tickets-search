@@ -3,7 +3,7 @@ import { useGetMoviesQuery } from "@/app/redux/services/movieApi"
 import { useDispatch, useSelector } from "react-redux"
 import FilmCard from "../FilmCard/FilmCard"
 
-export const MovieList = () =>{ 
+export const MovieList = () => { 
     // let dispatch = useDispatch()
     // let movies = useSelector((state) => state.movies)
     let {data, isLoading, error} = useGetMoviesQuery()

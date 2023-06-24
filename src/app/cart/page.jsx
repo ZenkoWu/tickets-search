@@ -8,54 +8,42 @@ import { useGetMovieQuery, useGetMoviesForCartQuery } from "../redux/services/mo
 
 
 const Cart = () => {
-    let tickets = useSelector((state) => state.cart.tickets)
-    console.log(tickets)
-    let result =[]
-    let ids = Object.keys(tickets)
-    let {data, isLoading} = useGetMoviesForCartQuery(ids,  useGetMovieQuery)
+    const cart = useSelector((state) => state.cart)
+
+    const tickets = cart.tickets
+    const ticketsCount = cart.ticketsCount
+
+    const ids = Object.keys(tickets)
+    const {data} = useGetMoviesForCartQuery(ids,  useGetMovieQuery)
     
-    if(!data) {
+    if(!data && ticketsCount > 0) {
         return <div>Wait...</div>
     }
-    // let results = getCartMovies(ids)
-    setTimeout(() => console.log(data), 2000)
     
-    // let data = useGetMovieQuery(ids[0])
-    // console.log(data)
-    // if(isLoading) {
-    //     return <div>Загрузка корзины...</div>
-    // }
-    // let results:any = [data]
-    // console.log(results)
-
-    // let results = ids.map(id=>useGetMovieQuery(id).data)
-    // console.log(results)
-    
-    // Promise.all(results).then(data => result.push(data))
-    // console.log(result)
-    // for(let id of ids) {
-    //     let data = useGetMovieQuery(id)
-    //     console.log(data)
-    //     result.push(data.data)
-    // }
-    // let movies = useSelector((state: any) => state.movies)
-    // let result = movies.filter((el:any) => tickets[el.id])
-    // console.log(result)
     return (
         <div className='d-flex flex-column gap-16' style={{height:'100%'}}>
-            <div style={{flex:'1 1 auto', height:'100%'}} className=" d-flex flex-column gap-16">
-                {data.map((el) => 
-                    <FilmCard
-                        isRemovable
-                        key={el.id}
-                        title={el.title} 
-                        posterUrl={el.posterUrl}
-                        genre={el.genre}
-                        id={el.id}
-                    />
-                )}
+            <div style={{flex:'1 1 auto', height:'100%', minHeight: 'calc(80vh - 80px)'}} className="d-flex flex-column gap-16">
+                { 
+                    data && ticketsCount > 0 ?
+                    data.map((el) => 
+                        <FilmCard
+                            isRemovable
+                            key={el.id}
+                            title={el.title} 
+                            posterUrl={el.posterUrl}
+                            genre={el.genre}
+                            id={el.id}
+                        />
+                    ) 
+                    : 
+                    <p className='fs20 fw-600'>
+                    Билетов пока нет
+                </p>
+                }
+                 
+               
             </div>
-            <div style={{flex:'0 0 auto'}}>
+            <div className='' style={{flex:'0 0 auto'}}>
                 <TicketsCount/>
             </div>
             {/* <DeleteTicket/> */}

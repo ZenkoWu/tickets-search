@@ -4,6 +4,7 @@ import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import s from './FilmCard.module.css'
 import { useSelector } from "react-redux";
 import Image from "next/image";
+import { useState } from "react";
 type TFilmCard = {
     id: string,
     title: string,
@@ -13,10 +14,12 @@ type TFilmCard = {
 
 }
 const FilmCard = ({title, posterUrl, genre, id, isRemovable}: TFilmCard) => {
-    
+    const [opened, setOpened] = useState(false)
+    const onDelete= () => {
+
+    }
     return (
         <div className={`backgroundTemplate d-flex align-start justify-content-between ${s.card}`}>
-            {/* <Link href={`/movies/${id}`} style={{width:'100%'}}> */}
                 <div className="d-flex align-start"> 
                     <img src={posterUrl} alt={title} className={s.img}/>
                     <div className={s.title}>
@@ -26,7 +29,6 @@ const FilmCard = ({title, posterUrl, genre, id, isRemovable}: TFilmCard) => {
                         <p className={s.genre}>{genre}</p>
                     </div>
                 </div>
-            {/* </Link>   */}
             <div className="d-flex gap-24 align-center">
             <ButtonGroup movieId={id}/>
                 { isRemovable &&
@@ -37,6 +39,7 @@ const FilmCard = ({title, posterUrl, genre, id, isRemovable}: TFilmCard) => {
                         width={20}
                         height={20}
                         priority
+                        onClick={() => alert('r u sure?')}
                     />
                 }
             </div>

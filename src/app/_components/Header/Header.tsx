@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useSelector } from 'react-redux'
 export const Header = () => {
     const ticketsCount = useSelector((state: any) => state.cart.ticketsCount)
+    
     return (
         <header className={`${s.header} d-flex justify-content-between align-center`}>
             <Link href='/'>Билетопоиск</Link>

@@ -13,7 +13,7 @@ export const movieApi = createApi({
               const response = await Promise.all(
                 ids.map((movieId) => fetchWithBQ(`${API_ROUTES.movieById}${movieId}`))
               );
-              console.log(response)
+            //   console.log(response)
               return response[0].data
                 ? { data: response.map((movie) => movie.data)}
                 : { error: response[0].error};
@@ -25,4 +25,16 @@ export const movieApi = createApi({
 
 export const {useGetMoviesQuery, useGetMovieQuery, useGetCinemaMoviesQuery, useGetMoviesForCartQuery} = movieApi;
 
-
+// getMovie: builder.query<Movie[], string>({
+//     query: (id) => `${API_ROUTES.movieById}${id}`,
+//   }),
+//   getMoviesForCart: builder.query<Movie[], string[]>({
+//     async queryFn(ids, _queryApi, _extraOptions, fetchWithBQ) {
+//       const response = await Promise.all(
+//         ids.map((id) => fetchWithBQ(`${API_ROUTES.movieById}${id}`))
+//       );
+//       return response[0].data
+//         ? { data: response.map((movie) => movie.data) as Movie[] }
+//         : { error: response[0].error as FetchBaseQueryError };
+//     },
+//   }),

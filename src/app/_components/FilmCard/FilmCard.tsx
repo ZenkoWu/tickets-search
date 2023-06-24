@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useState } from "react";
 import DeleteTicket from "../Modal/DeleteTicket/DeleteTicket";
 import { createPortal } from "react-dom";
+
 type TFilmCard = {
     id: string,
     title: string,

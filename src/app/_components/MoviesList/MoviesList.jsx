@@ -2,6 +2,7 @@ import { moviesActions } from "@/app/redux/features/movies"
 import { useGetMoviesQuery } from "@/app/redux/services/movieApi"
 import { useDispatch, useSelector } from "react-redux"
 import FilmCard from "../FilmCard/FilmCard"
+import Preloader from "../Preloader/Preloader"
 
 export const MovieList = () => { 
     // let dispatch = useDispatch()
@@ -10,7 +11,8 @@ export const MovieList = () => {
     console.log(data)
 
     if(isLoading) {
-        return <div>Загрузка фильмов...</div>
+        // return <div>Загрузка фильмов...</div>
+        return <Preloader/>
     }
     if(!data || error) {
         return <div>'Данные не найдены'</div>

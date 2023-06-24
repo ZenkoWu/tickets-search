@@ -4,6 +4,7 @@ import { useGetMovieQuery } from "@/app/redux/services/movieApi";
 import s from './page.module.css'
 import ButtonGroup from "@/app/_components/ButtonGroup/ButtonGroup";
 import { Reviews } from "@/app/_components/Reviews/Reviews";
+import Preloader from "@/app/_components/Preloader/Preloader";
 
 type TFilmData = {
     description: string,
@@ -20,7 +21,7 @@ type TFilmData = {
 const FilmDescription = (props: any) => { 
     const {data, isLoading, error} = useGetMovieQuery(props.params.id)
     if(isLoading) {
-        return <div>Загрузка фильма...</div> //todo добавить лоадер из сайта соц сетей
+        return <Preloader/>
     }
     // console.log(data)
     return ( 

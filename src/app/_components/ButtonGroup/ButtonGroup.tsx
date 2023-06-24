@@ -23,13 +23,13 @@ const ButtonGroup = ({movieId}: {movieId: string}) => {
     return (
         <div className='d-flex justify-content-between align-start'>
             <Button
-                src='minus.svg'
+                src='/minus.svg'
                 isDisabled={!ticketCount}
                 onClick={() => removeTicket(movieId)}
             />
             <p className='fw-600' style={{padding: '0 8px', color: 'black'}}>{ticketCount ?? 0}</p>
             <Button 
-                src='plus.svg'
+                src='/plus.svg'
                 isDisabled={ticketCount === 30}
                 onClick={()=> addTicket(movieId)}
             />

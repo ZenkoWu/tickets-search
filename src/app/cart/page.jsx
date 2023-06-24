@@ -4,6 +4,8 @@ import DeleteTicket from "../_components/Modal/DeleteTicket/DeleteTicket";
 import FilmCard from "../_components/FilmCard/FilmCard";
 import { TicketsCount } from "./TicketsCount/TicketsCount";
 import { useGetMovieQuery, useGetMoviesForCartQuery } from "../redux/services/movieApi";
+import Preloader from "../_components/Preloader/Preloader";
+
 
 
 
@@ -17,9 +19,9 @@ const Cart = () => {
     const {data} = useGetMoviesForCartQuery(ids,  useGetMovieQuery)
     
     if(!data && ticketsCount > 0) {
-        return <div>Wait...</div>
+        return <Preloader/>
     }
-    
+
     return (
         <div className='d-flex flex-column gap-16' style={{height:'100%'}}>
             <div style={{flex:'1 1 auto', height:'100%', minHeight: 'calc(80vh - 80px)'}} className="d-flex flex-column gap-16">

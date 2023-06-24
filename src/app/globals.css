@@ -130,3 +130,9 @@ img {
 .text-white {
   color: white;
 }
+
+[contentEditable]:empty:before {
+  content: attr(data-placeholder);
+  color: grey;
+  display: inline-block;
+  }

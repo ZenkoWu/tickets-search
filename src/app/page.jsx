@@ -9,7 +9,7 @@ import { useState } from 'react'
 export default function Home() {
     let {data, isLoading, error} = useGetMoviesQuery()
     const [name, setName] = useState('')
-    
+
     data = data?.filter(el => el?.title.toLowerCase().includes(name?.toLowerCase()))
     console.log(name)
     console.log(data)

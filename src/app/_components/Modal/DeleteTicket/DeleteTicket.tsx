@@ -36,7 +36,7 @@ const DeleteTicket = ({movieId, setOpened, opened}: TDeleteTicket) => {
                     <Image
                         onClick={onCancel}
                         className='pointer'
-                        src={'close.svg'}
+                        src={'/icons/close.svg'}
                         alt="close"
                         width={16}
                         height={16}

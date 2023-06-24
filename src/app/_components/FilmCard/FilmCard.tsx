@@ -37,7 +37,7 @@ const FilmCard = ({title, posterUrl, genre, id, isRemovable}: TFilmCard) => {
                 { isRemovable &&
                     <Image
                         className='pointer'
-                        src={'close.svg'}
+                        src={'/icons/close.svg'}
                         alt="close"
                         width={20}
                         height={20}

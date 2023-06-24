@@ -19,7 +19,7 @@ export const Header = () => {
                 }
                 <Link href='/cart' className='d-flex align-center'>
                     <Image
-                        src="/basket.svg"
+                        src="/icons/basket.svg"
                         alt="basket"
                         width={32}
                         height={32}

@@ -17,7 +17,7 @@ const Review = ({name, rating, text, id, photoUrl}: TReviewData) => {
                     <img src={photoUrl}/> 
                     :
                         <Image
-                            src={'/photo.svg'}
+                            src={'/icons/photo.svg'}
                             alt="default"
                             width={32}
                             height={32}

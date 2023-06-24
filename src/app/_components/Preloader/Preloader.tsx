@@ -4,7 +4,7 @@ const Preloader = () => {
     return(
       <div style={{margin: 'auto', textAlign: 'center'}}>
          <Image
-            src={'/spinner.svg'}
+            src={'/icons/spinner.svg'}
             width={200}
             height={200}
             alt='loader'

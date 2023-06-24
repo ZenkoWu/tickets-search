@@ -9,10 +9,14 @@ import { useGetMovieQuery, useGetMoviesForCartQuery } from "../redux/services/mo
 
 const Cart = () => {
     let tickets = useSelector((state) => state.cart.tickets)
+    console.log(tickets)
     let result =[]
     let ids = Object.keys(tickets)
     let {data, isLoading} = useGetMoviesForCartQuery(ids,  useGetMovieQuery)
     
+    if(!data) {
+        return <div>Wait...</div>
+    }
     // let results = getCartMovies(ids)
     setTimeout(() => console.log(data), 2000)
     
@@ -40,7 +44,7 @@ const Cart = () => {
     return (
         <div className='d-flex flex-column gap-16' style={{height:'100%'}}>
             <div style={{flex:'1 1 auto', height:'100%'}} className=" d-flex flex-column gap-16">
-                {/* {results.map((el:any) => 
+                {data.map((el) => 
                     <FilmCard
                         isRemovable
                         key={el.id}
@@ -49,7 +53,7 @@ const Cart = () => {
                         genre={el.genre}
                         id={el.id}
                     />
-                )} */}
+                )}
             </div>
             <div style={{flex:'0 0 auto'}}>
                 <TicketsCount/>

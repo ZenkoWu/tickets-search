@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux"
 import FilmCard from "../FilmCard/FilmCard"
 
 export const MovieList = () => { 
-    // let dispatch = useDispatch()
-    // let movies = useSelector((state) => state.movies)
+    let dispatch = useDispatch()
+    let movies = useSelector((state) => state.movies)
     let {data, isLoading, error} = useGetMoviesQuery()
     console.log(data)
 
@@ -15,20 +15,26 @@ export const MovieList = () => {
     if(!data || error) {
         return <div>'Данные не найдены'</div>
     }
-    //  else {
-    //     dispatch(moviesActions.getMovies(data))
-    // }
+     else {
+        dispatch(moviesActions.getMovies(data))
+    }
 
     return (
-        <div style={{display:'flex', flexDirection:'column', gap:'20px'}}>
+        <div className='d-flex flex-column gap-16' style={{minHeight: '100%'}}>
             {
-                data && data.map((el, i) => 
+                data && data.map((el) => 
                     <FilmCard
-                        key={i}
-                        {...el}
+                        isRemovable={false}
+                        key={el.id}
+                        title={el.title} 
+                        posterUrl={el.posterUrl}
+                        genre={el.genre}
+                        id={el.id}
                     />
                 )
             }     
         </div>
     )
 }
+
+//todo создать компонент муви лист с контейнером для главной и корзины!!!!

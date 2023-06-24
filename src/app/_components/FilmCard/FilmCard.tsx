@@ -3,14 +3,16 @@ import Link from "next/link";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import s from './FilmCard.module.css'
 import { useSelector } from "react-redux";
+import Image from "next/image";
 type TFilmCard = {
     id: string,
     title: string,
     posterUrl: string,
-    genre: string
+    genre: string,
+    isRemovable: boolean
 
 }
-const FilmCard = ({title, posterUrl, genre, id}: TFilmCard) => {
+const FilmCard = ({title, posterUrl, genre, id, isRemovable}: TFilmCard) => {
     
     return (
         <div className={`backgroundTemplate d-flex align-start justify-content-between ${s.card}`}>
@@ -23,8 +25,19 @@ const FilmCard = ({title, posterUrl, genre, id}: TFilmCard) => {
                     </div>
                 </div>
             </Link>  
-        
+            <div className="d-flex gap-24 align-center">
             <ButtonGroup movieId={id}/>
+                { isRemovable &&
+                    <Image
+                        className='pointer'
+                        src={'close.svg'}
+                        alt="close"
+                        width={20}
+                        height={20}
+                        priority
+                    />
+                }
+            </div>
         </div>
     )
 }

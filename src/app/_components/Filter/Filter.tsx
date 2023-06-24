@@ -1,3 +1,4 @@
+import ArrowImage from '../ArrowImage/ArrowImage';
 import s from './Filter.module.css'
 
 const inputs = [
@@ -5,6 +6,7 @@ const inputs = [
         title: 'Название', 
         placeholder: 'Введите название', 
         isSelect: false, 
+        
     },
     {
         title: 'Жанр', 
@@ -24,17 +26,17 @@ const Filter = () => {
             <div className={`${s.filter} backgroundTemplate`}>
                 <p className='fs20' style={{fontWeight:'600', paddingBottom: '4px'}}>Фильтр поиска</p>
                 <div>
-                {
-                    inputs.map(el => 
-                        <TextField
-                            key={el.title}
-                            title={el.title}
-                            placeholder={el.placeholder}
-                            isSelect={el.isSelect}
-                            options={el.options}
-                        />
-                    )
-                }
+                    {
+                        inputs.map(el => 
+                            <TextField
+                                key={el.title}
+                                title={el.title}
+                                placeholder={el.placeholder}
+                                isSelect={el.isSelect}
+                                options={el.options}
+                            />
+                        )
+                    }
                 </div>
         </div>
     )
@@ -54,29 +56,34 @@ const TextField = ({
     isSelect, 
     options
 }: TTextField) => {
+    
     return (
         <div style={{paddingTop: '16px', }}>
-             {/* <form action="" className=''> */}
+             <form action="" className=''>
                 {/* <div className='pt-4'> */}
                 {/* <label htmlFor="">Жанр</label> */}
                 <p style={{padding: '4px 0'}}>{title}</p>
-                <div 
-                    // type="text" 
+                <div className='d-flex align-center rounded-8' 
+                style={{ border:'1px solid  #E1E3E6',  padding:'0px 16px',}}>
+                <input 
+                    type="text" 
                     // name={title} 
-                    // value=''
+                    // value=
                     // value={data.loginOrUserName}
                     style={{height:'40px', color: '#999FA6',  
-                    borderRadius:'8px', border:'1px solid  #E1E3E6', width: '100%', padding:'10px 16px'}}
-                    // className='w-100 text-seconary fs-6 ps-3'
+                    borderRadius:'8px', border:'none', width: '100%', }}
+                    // className='fs20'
                     // onChange={(e)=> set('loginOrUserName', e.target.value)}
                     // id={title}
-                    // placeholder={placeholder}
+                    placeholder={placeholder}
                     // autoComplete="off"
-                >
-                    {placeholder}
+                />{
+                   options&& <ArrowImage opened={false} color='grey' width={18}/>
+                }
                 </div>
-            {/* </div> */}
-            {/* </form> */}
+                    
+            </form>
         </div>
     )
 }
+// todo вынести в константы массивы константные 

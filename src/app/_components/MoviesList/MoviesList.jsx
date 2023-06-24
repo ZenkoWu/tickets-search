@@ -4,22 +4,15 @@ import { useDispatch, useSelector } from "react-redux"
 import FilmCard from "../FilmCard/FilmCard"
 import Preloader from "../Preloader/Preloader"
 
-export const MovieList = () => { 
-    // let dispatch = useDispatch()
-    // let movies = useSelector((state) => state.movies)
-    let {data, isLoading, error} = useGetMoviesQuery()
-    console.log(data)
+export const MovieList = ({data, isLoading, error }) => { 
+    // let {data, isLoading, error} = useGetMoviesQuery()
 
     if(isLoading) {
-        // return <div>Загрузка фильмов...</div>
         return <Preloader/>
     }
     if(!data || error) {
         return <div>'Данные не найдены'</div>
     }
-    //  else {
-    //     dispatch(moviesActions.getMovies(data))
-    // }
 
     return (
         <div className='d-flex flex-column gap-16' >

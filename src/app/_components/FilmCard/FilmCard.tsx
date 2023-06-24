@@ -51,3 +51,4 @@ const FilmCard = ({title, posterUrl, genre, id, isRemovable}: TFilmCard) => {
     )
 }
 export default FilmCard;
+// todo пересмотреть пораталы!!!

@@ -5,6 +5,7 @@ import FilmCard from "../_components/FilmCard/FilmCard";
 import { TicketsCount } from "./TicketsCount/TicketsCount";
 import { useGetMovieQuery, useGetMoviesForCartQuery } from "../redux/services/movieApi";
 import Preloader from "../_components/Preloader/Preloader";
+import { genresRu } from "../_components/MoviesList/MoviesList";
 
 
 
@@ -33,7 +34,7 @@ const Cart = () => {
                             key={el.id}
                             title={el.title} 
                             posterUrl={el.posterUrl}
-                            genre={el.genre}
+                            genre={genresRu[el.genre]}
                             id={el.id}
                         />
                     ) 

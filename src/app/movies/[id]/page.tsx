@@ -5,6 +5,7 @@ import s from './page.module.css'
 import ButtonGroup from "@/app/_components/ButtonGroup/ButtonGroup";
 import { Reviews } from "@/app/_components/Reviews/Reviews";
 import Preloader from "@/app/_components/Preloader/Preloader";
+import { genresRu } from "@/app/_components/MoviesList/MoviesList";
 
 type TFilmData = {
     description: string,
@@ -39,7 +40,7 @@ const FilmDescription = (props: any) => {
                         <div className='d-flex flex-column gap-24 fs20'>
                             <p>
                                 <span className='fw-600'>Жанр: </span> 
-                                {data.genre}
+                                {genresRu[data.genre as keyof typeof genresRu]}
                             </p>
                             <p>
                                 <span className='fw-600'>Год выпуска: </span> 

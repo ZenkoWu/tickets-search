@@ -1,27 +1,39 @@
 import ArrowImage from '../ArrowImage/ArrowImage';
 import s from './Filter.module.css'
 
-const inputs = [
-    {
-        title: 'Название', 
-        placeholder: 'Введите название', 
-        isSelect: false, 
-        
-    },
-    {
-        title: 'Жанр', 
-        placeholder: 'Выберите жанр', 
-        isSelect: true, 
-        options: []
-    },
-    {
-        title: 'Кинотеатр', 
-        placeholder: 'Выберите кинотеатр', 
-        isSelect: true, 
-        options: []
-    },
-]
-const Filter = () => {
+type TFilter ={
+    name: string,
+    setName:()=> void,
+    
+}
+const Filter = ({name, setName}: TFilter) => {
+    const inputs = [
+        {
+            title: 'Название', 
+            placeholder: 'Введите название', 
+            isSelect: false,
+            value: name,
+            setValue: setName 
+            
+        },
+        {
+            title: 'Жанр', 
+            placeholder: 'Выберите жанр', 
+            isSelect: true, 
+            options: [],
+            value: '',
+            setValue: () => null 
+        },
+        {
+            title: 'Кинотеатр', 
+            placeholder: 'Выберите кинотеатр', 
+            isSelect: true, 
+            options: [],
+            value: '',
+            setValue:  () => null  
+        },
+    ]
+
     return (
             <div className={`${s.filter} backgroundTemplate`}>
                 <p className='fs20' style={{fontWeight:'600', paddingBottom: '4px'}}>Фильтр поиска</p>
@@ -29,6 +41,8 @@ const Filter = () => {
                     {
                         inputs.map(el => 
                             <TextField
+                                value={el.value}
+                                setValue={el.setValue}
                                 key={el.title}
                                 title={el.title}
                                 placeholder={el.placeholder}
@@ -45,12 +59,16 @@ const Filter = () => {
 export default Filter;
 
 type TTextField = {
+    value: string, 
+    setValue: (value: string) => void,
     title: string,
     placeholder: string,
     isSelect: boolean,
     options?: string[]
 }
 const TextField = ({
+    value,
+    setValue,
     title, 
     placeholder, 
     isSelect, 
@@ -68,12 +86,12 @@ const TextField = ({
                 <input 
                     type="text" 
                     // name={title} 
-                    // value=
+                    value={value}
                     // value={data.loginOrUserName}
                     style={{height:'40px', color: '#999FA6',  
                     borderRadius:'8px', border:'none', width: '100%', }}
                     // className='fs20'
-                    // onChange={(e)=> set('loginOrUserName', e.target.value)}
+                    onChange={(e)=> setValue(e.target.value)}
                     // id={title}
                     placeholder={placeholder}
                     // autoComplete="off"

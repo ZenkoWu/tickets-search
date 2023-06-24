@@ -4,9 +4,14 @@ import { useDispatch, useSelector } from "react-redux"
 import FilmCard from "../FilmCard/FilmCard"
 import Preloader from "../Preloader/Preloader"
 
-export const MovieList = ({data, isLoading, error }) => { 
-    // let {data, isLoading, error} = useGetMoviesQuery()
+export const genresRu = {
+    action: 'Боевик',
+    comedy: 'Комедия',
+    fantasy: 'Фэнтези',
+    horror: 'Ужасы',
+}
 
+export const MovieList = ({data, isLoading, error }) => { 
     if(isLoading) {
         return <Preloader/>
     }
@@ -23,7 +28,7 @@ export const MovieList = ({data, isLoading, error }) => {
                         key={el.id}
                         title={el.title} 
                         posterUrl={el.posterUrl}
-                        genre={el.genre}
+                        genre={genresRu[el.genre]}
                         id={el.id}
                     />
                 )

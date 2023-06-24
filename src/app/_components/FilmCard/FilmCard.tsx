@@ -5,6 +5,8 @@ import s from './FilmCard.module.css'
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import { useState } from "react";
+import DeleteTicket from "../Modal/DeleteTicket/DeleteTicket";
+import { createPortal } from "react-dom";
 type TFilmCard = {
     id: string,
     title: string,
@@ -39,9 +41,10 @@ const FilmCard = ({title, posterUrl, genre, id, isRemovable}: TFilmCard) => {
                         width={20}
                         height={20}
                         priority
-                        onClick={() => alert('r u sure?')}
+                        onClick={() => setOpened(prev => !prev)}
                     />
                 }
+                {opened && createPortal(<DeleteTicket opened={opened} setOpened={setOpened} movieId={id}/>, document.body)}
             </div>
         </div>
     )

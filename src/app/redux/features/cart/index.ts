@@ -35,8 +35,10 @@ const cartSlice = createSlice({
         removeTicket: (state: any, {payload}: {payload: any}) => {
             const count = state.tickets[payload];
             delete state.tickets[payload]
-
-            state.ticketsCount-=count
+            
+            if(!state.tickets[payload]) {
+                state.ticketsCount-=count
+            }
             return;
         }
     }

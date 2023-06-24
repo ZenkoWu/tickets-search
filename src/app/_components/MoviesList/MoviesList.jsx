@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux"
 import FilmCard from "../FilmCard/FilmCard"
 
 export const MovieList = () => { 
-    let dispatch = useDispatch()
-    let movies = useSelector((state) => state.movies)
+    // let dispatch = useDispatch()
+    // let movies = useSelector((state) => state.movies)
     let {data, isLoading, error} = useGetMoviesQuery()
     console.log(data)
 
@@ -15,12 +15,12 @@ export const MovieList = () => {
     if(!data || error) {
         return <div>'Данные не найдены'</div>
     }
-     else {
-        dispatch(moviesActions.getMovies(data))
-    }
+    //  else {
+    //     dispatch(moviesActions.getMovies(data))
+    // }
 
     return (
-        <div className='d-flex flex-column gap-16' style={{minHeight: '100%'}}>
+        <div className='d-flex flex-column gap-16' >
             {
                 data && data.map((el) => 
                     <FilmCard

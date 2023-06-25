@@ -18,9 +18,7 @@ type TFilmCard = {
 }
 const FilmCard = ({title, posterUrl, genre, id, isRemovable}: TFilmCard) => {
     const [opened, setOpened] = useState(false)
-    const onDelete= () => {
-
-    }
+    
     return (
         <div className={`backgroundTemplate d-flex align-start justify-content-between ${s.card}`}>
                 <div className="d-flex align-start"> 
@@ -33,8 +31,8 @@ const FilmCard = ({title, posterUrl, genre, id, isRemovable}: TFilmCard) => {
                     </div>
                 </div>
             <div className="d-flex gap-24 align-center">
-            <ButtonGroup movieId={id}/>
-                { isRemovable &&
+            <ButtonGroup movieId={id} isRemovable={isRemovable}/>
+                {/* { isRemovable &&
                     <Image
                         className='pointer'
                         src={'/icons/close.svg'}
@@ -44,8 +42,8 @@ const FilmCard = ({title, posterUrl, genre, id, isRemovable}: TFilmCard) => {
                         priority
                         onClick={() => setOpened(prev => !prev)}
                     />
-                }
-                {opened && createPortal(<DeleteTicket opened={opened} setOpened={setOpened} movieId={id}/>, document.body)}
+                } */}
+                {/* {opened && createPortal(<DeleteTicket opened={opened} setOpened={setOpened} movieId={id}/>, document.body)} */}
             </div>
         </div>
     )

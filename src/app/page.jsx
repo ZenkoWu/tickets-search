@@ -6,6 +6,7 @@ import { MovieList, genresRu } from './_components/MoviesList/MoviesList'
 import { useGetCinemaMoviesQuery, useGetMoviesQuery } from './redux/services/movieApi'
 import { useReducer, useState } from 'react'
 import { useGetCinemasQuery } from './redux/services/cinemaApi'
+import Preloader from './_components/Preloader/Preloader'
 
 const reducer = (state, {type, payload}) => {
     switch(type){
@@ -42,7 +43,7 @@ const initialState = {
 export default function Home() {
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    let {data, isLoading, error} = useGetMoviesQuery()
+    let {data, isLoading : isLoading2, error} = useGetMoviesQuery()
     console.log(data)
     const onNameChange = (payload) => dispatch({type: 'setMovieName', payload})
     
@@ -50,11 +51,15 @@ export default function Home() {
 
     const onCinemaSet =(payload) => dispatch({type: 'setCinema', payload})
     let movie = data;
-
+    let brrr = useGetCinemaMoviesQuery(state.cinema?.id)
+    console.log(brrr)
     // if(state.cinema) {
-        let {data: data2} = useGetCinemaMoviesQuery(state.cinema?.id)
+        let {data: data2, status} = useGetCinemaMoviesQuery(state.cinema?.id)
         movie = data2;
         // movie = movie?.filter(el => genresRu[el.genre] == state.genre)
+    // }
+    // if(status == 'pending') {
+    //     return <Preloader/>
     // }
 
      movie = movie?.filter(el =>el?.title.toLowerCase().includes(state.movieName?.toLowerCase().trim()))
@@ -86,8 +91,9 @@ export default function Home() {
                 />
             <MovieList 
                 data={movie} 
-                isLoading={isLoading} 
+                isLoading={isLoading2} 
                 error={error}
+                status={status}
             />
         </main>
     )

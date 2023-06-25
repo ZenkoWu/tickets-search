@@ -11,8 +11,8 @@ export const genresRu = {
     horror: 'Ужасы',
 }
 
-export const MovieList = ({data, isLoading, error }) => { 
-    if(isLoading) {
+export const MovieList = ({data, isLoading, error , status}) => { 
+    if(isLoading || status == 'pending') {
         return <Preloader/>
     }
     if(!data || error) {

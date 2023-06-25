@@ -2,11 +2,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import Button from "./Button/Button";
 import { cartActions } from "@/app/redux/features/cart";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 import {selectProductAmount} from '../../redux/features/cart/selector'
+import Image from "next/image";
+import { createPortal } from "react-dom";
+import DeleteTicket from "../Modal/DeleteTicket/DeleteTicket";
 
-const ButtonGroup = ({movieId}: {movieId: string}) => {
+const ButtonGroup = ({movieId, isRemovable}: {movieId: string, isRemovable: boolean}) => {
+    const [opened, setOpened] = useState(false)
+
     let ticketCount = useSelector((state: any) => state.cart.tickets[movieId])
     const dispatch = useDispatch()
 
@@ -16,9 +21,13 @@ const ButtonGroup = ({movieId}: {movieId: string}) => {
     }, [movieId])
 
     const removeTicket = useCallback((movieId: string) => {
-        console.log('remove')
-        dispatch(cartActions.decrement(movieId))
-    }, [movieId])
+        if(ticketCount > 1) {
+            dispatch(cartActions.decrement(movieId))
+        }else {
+            setOpened(true)
+        }
+
+    }, [movieId, ticketCount])
    
     return (
         <div className='d-flex justify-content-between align-start'>
@@ -33,6 +42,23 @@ const ButtonGroup = ({movieId}: {movieId: string}) => {
                 isDisabled={ticketCount === 30}
                 onClick={()=> addTicket(movieId)}
             />
+
+            {
+                isRemovable && 
+                <div style={{paddingLeft:'24px'}}>
+                    <Image
+                    className='pointer'
+                    src={'/icons/close.svg'}
+                    alt="close"
+                    width={20}
+                    height={20}
+                    priority
+                    onClick={() => setOpened(prev => !prev)}
+                />
+            </div>
+            }
+             {opened && createPortal(<DeleteTicket opened={opened} setOpened={setOpened} movieId={movieId}/>, document.body)}
+            
         </div>
     )
 }

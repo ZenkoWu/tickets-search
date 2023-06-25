@@ -29,7 +29,7 @@ genre, setGenre}: TFilter) => {
             title: 'Жанр', 
             placeholder: 'Выберите жанр', 
             isSelect: true, 
-            options: ['Не выбран', ...Object.values(genresRu)].map((el: any) => ({id: el, name: el})),
+            options: ['Не выбран', ...Object.values(genresRu)]?.map((el: any) => ({id: el, name: el})),
             value: genre,
             setValue: setGenre,
         },
@@ -254,7 +254,7 @@ const Selects = ({options, value, setValue}: {options: any[], value?: string, zI
         zIndex: '600', top:'84px', width :'100%', boxShadow: '0px 2px 5px rgba(27, 31, 35, 0.12)',
         }}>
             {
-                options.map(el => 
+                options?.map(el => 
                     <div className='option' onClick={() => setValue({id: el.id, name: el.name})} style={{padding: '12px 0', fontWeight: '100', }}>{el.name}</div>
                 )
             }

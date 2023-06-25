@@ -27,6 +27,7 @@ const FAQ = () => {
         <>
            {questionsAnswers.map(q => 
             <OneQuestion
+                key={q.question}
                 question={q.question} 
                 answer={q.answer}
                 />

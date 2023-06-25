@@ -12,6 +12,7 @@ export const store = configureStore({
         movies: moviesReducer,
         [movieApi.reducerPath]: movieApi.reducer, 
         [reviewsApi.reducerPath]: reviewsApi.reducer, 
+        [cinemaApi.reducerPath]: cinemaApi.reducer, 
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([
         movieApi.middleware, 

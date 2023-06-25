@@ -16,7 +16,7 @@ export const MovieList = ({data, isLoading, error }) => {
         return <Preloader/>
     }
     if(!data || error) {
-        return <div>'Данные не найдены'</div>
+        return <div>Данные не найдены</div>
     }
 
     return (

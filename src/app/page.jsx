@@ -2,31 +2,75 @@
 
 import Filter from './_components/Filter/Filter'
 import s from './page.module.css'
-import { MovieList } from './_components/MoviesList/MoviesList'
+import { MovieList, genresRu } from './_components/MoviesList/MoviesList'
 import { useGetMoviesQuery } from './redux/services/movieApi'
-import { useState } from 'react'
+import { useReducer, useState } from 'react'
+import { useGetCinemasQuery } from './redux/services/cinemaApi'
 
+const reducer = (state, {type, payload}) => {
+    switch(type){
+        case 'setMovieName': 
+        return {
+             ...state,
+            movieName: payload
+        }
+        case 'setGenre': 
+        return {
+            ...state,
+            genre: payload
+        }
+        case 'setCinema': 
+        return {
+            ...state,
+            cinema: payload
+        }
+        default: return state;
+    }
+}
+const initialState = {
+    movieName: '',
+    genre: null, 
+    cinema: null
+
+}
 export default function Home() {
-    let {data, isLoading, error} = useGetMoviesQuery()
-    const [name, setName] = useState('')
-    const[genresOpened, setGenresOpened] = useState(false)
-    const[cinemasOpened, setCinemasOpened] = useState(false)
+    const [state, dispatch] = useReducer(reducer, initialState)
 
-    data = data?.filter(el => el?.title.toLowerCase().includes(name?.toLowerCase()))
-    console.log(name)
-    console.log(data)
+    let {data, isLoading, error} = useGetMoviesQuery()
+
+    const onNameChange = (payload) => dispatch({type: 'setMovieName', payload})
+    
+    const onGenreSet =(payload) => dispatch({type: 'setGenre', payload})
+
+    const onCinemaSet =(payload) => dispatch({type: 'setCinema', payload})
+
+    let movie = data?.filter(el =>el?.title.toLowerCase().includes(state.movieName?.toLowerCase().trim()))
+
+    if(state.genre && state.genre != 'Не выбран') {
+        movie = movie?.filter(el => genresRu[el.genre] == state.genre)
+    }
+    
+    let {data2}= useGetCinemasQuery()
+    if(data2) {
+        console.log(data2)
+    }
+    
    
     return (
         <main className={s.mainWrapper}>
             <Filter 
-                name={name} 
-                setName={setName}
-                genresOpened={genresOpened}
-                setGenresOpened={setGenresOpened}
-                cinemasOpened={cinemasOpened}
-                setCinemasOpened={setCinemasOpened}
+                name={state.movieName} 
+                setName={onNameChange}
+                cinema={state.cinema}
+                setCinema={onCinemaSet}
+                genre={state.genre}
+                setGenre={onGenreSet}
                 />
-            <MovieList data={data} isLoading={isLoading} error={error}/>
+            <MovieList 
+                data={movie} 
+                isLoading={isLoading} 
+                error={error}
+            />
         </main>
     )
 } 

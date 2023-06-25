@@ -9,7 +9,7 @@ export const Reviews = ({movieId}: {movieId: string}) => {
         return <Preloader/>
     }
     if(!data || error) {
-        return <div>'Данные не найдены'</div>
+        return <div>Данные не найдены</div>
     }
     return (
         <div className='d-flex flex-column gap-24'>

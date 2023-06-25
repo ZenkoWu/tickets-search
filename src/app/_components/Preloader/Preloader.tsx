@@ -8,6 +8,7 @@ const Preloader = () => {
             width={200}
             height={200}
             alt='loader'
+            priority
         />
       </div>
     )

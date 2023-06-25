@@ -8,12 +8,10 @@ import { useGetCinemasQuery } from '@/app/redux/services/cinemaApi';
 type TFilter ={
     name: string,
     genre: string, 
+    cinema: string,
     setGenre:()=> void,
     setName:()=> void,
-    genresOpened: boolean,
-    cinemasOpened: boolean,
-    setCinemasOpened: () => void,
-    setGenresOpened: () => void
+    setCinema: () => void,
 
     
 }
@@ -23,17 +21,15 @@ const input = {
     isSelect: false,
 }
 
-const Filter = ({name, setName, 
-    genresOpened, cinemasOpened, setCinemasOpened, 
-    setGenresOpened,
+const Filter = ({name, setName, cinema, setCinema,
 genre, setGenre}: TFilter) => {
-   
+    let {data}: any= useGetCinemasQuery('')
     const selects = [
         {
             title: 'Жанр', 
             placeholder: 'Выберите жанр', 
             isSelect: true, 
-            options: ['Не выбран', ...Object.values(genresRu)],
+            options: ['Не выбран', ...Object.values(genresRu)].map((el: any) => ({id: el, name: el})),
             value: genre,
             setValue: setGenre,
         },
@@ -41,9 +37,9 @@ genre, setGenre}: TFilter) => {
             title: 'Кинотеатр', 
             placeholder: 'Выберите кинотеатр', 
             isSelect: true, 
-            options: [],
-            value: null,
-            setValue:  () => null,
+            options: data?.map((el: any) => ({id: el.id, name: el.name})),
+            value: cinema,
+            setValue:  setCinema
         },
     ]
 
@@ -82,8 +78,8 @@ genre, setGenre}: TFilter) => {
 export default Filter;
 
 type TTextField = {
-    value: string, 
-    setValue: (value: string) => void,
+    value: any, 
+    setValue: (value: any) => void,
     title: string,
     placeholder: string,
     isSelect?: boolean,
@@ -145,18 +141,22 @@ const SelectField =({value, setValue, placeholder, title, options}: TTextField) 
     const [domReady, setDomReady] = useState(false)
     const [opened, setOpened] = useState(false)
 
+    const onRejection = (e: any) => {
+        opened && e?.target?.className == s.wrapper_modal && setOpened(false)
+    }
+
    useEffect(() => {
     setDomReady(true)
   }, [document.getElementById(title)!])
 
     return (
         <div id={title} style={{position:'relative', }} className='pointer'>
-        <TextFieldWrapper title={title}>
-                    <div className='d-flex justify-content-between' 
+        <TextFieldWrapper title={title} opened={opened}>
+                    <div className='d-flex justify-content-between ' 
                     style={{color: 'rgba(27, 31, 35, 0.7)', padding:'0' , 
                     width: '100%', alignItems:'center', fontSize:'14px'}}
                     onClick={()=> setOpened?.((prev: any) => !prev)}
-                    >{value ?? placeholder}
+                    >{value?.name ?? placeholder}
                     <ArrowImage opened={opened!} color='grey' width={18}/>
                     </div>
 
@@ -186,11 +186,11 @@ const InputField =({value, setValue, placeholder, title}: TTextField) => {
 }
 
 
-const TextFieldWrapper =({children, title}: {children : React.ReactNode, title: string}) => {
+const TextFieldWrapper =({children, title, opened}: {children : React.ReactNode, title: string, opened?: boolean}) => {
     return (
         <div style={{paddingBottom: '16px'}}>
             <p style={{padding: '4px 0'}}>{title}</p>
-            <div className='d-flex align-center rounded-8' 
+            <div className={'d-flex align-center rounded-8 ' + (opened ? ' border' : '')}
             style={{ border:'1px solid  #E1E3E6',  padding:'10px 16px',}}>
                 {children}
             </div>
@@ -248,14 +248,14 @@ const TextFieldWrapper =({children, title}: {children : React.ReactNode, title: 
     //     placeholder={placeholder}
     // />
 
-const Selects = ({options, value, setValue}: {options: string[], value?: string, zIndex?: number, setValue: (p: string) => any}) => {
+const Selects = ({options, value, setValue}: {options: any[], value?: string, zIndex?: number, setValue: (p: any) => any}) => {
     return (
         <div className='backgroundTemplate' style={{position: 'absolute', padding: '12px 24px', color: 'rgba(27, 31, 35, 1)', 
         zIndex: '600', top:'84px', width :'100%', boxShadow: '0px 2px 5px rgba(27, 31, 35, 0.12)',
         }}>
             {
                 options.map(el => 
-                    <div className='option' onClick={() => setValue(el)} style={{padding: '12px 0', fontWeight: '100', }}>{el}</div>
+                    <div className='option' onClick={() => setValue({id: el.id, name: el.name})} style={{padding: '12px 0', fontWeight: '100', }}>{el.name}</div>
                 )
             }
         </div>

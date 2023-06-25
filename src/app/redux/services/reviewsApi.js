@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import {API_ROUTES, BASE_URL} from './api_routes/api_routes'
-
+ 
 export const reviewsApi = createApi({
     reducerPath: 'reviews',
     baseQuery: fetchBaseQuery({baseUrl: BASE_URL}),

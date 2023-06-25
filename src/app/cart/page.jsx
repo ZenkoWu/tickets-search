@@ -40,16 +40,14 @@ const Cart = () => {
                     ) 
                     : 
                     <p className='fs20 fw-600'>
-                    Билетов пока нет
-                </p>
+                        Билетов пока нет
+                    </p>
                 }
-                 
                
             </div>
             <div className='' style={{flex:'0 0 auto'}}>
                 <TicketsCount/>
             </div>
-            {/* <DeleteTicket/> */}
 
         </div>
     )

@@ -9,6 +9,8 @@ import { useState } from 'react'
 export default function Home() {
     let {data, isLoading, error} = useGetMoviesQuery()
     const [name, setName] = useState('')
+    const[genresOpened, setGenresOpened] = useState(false)
+    const[cinemasOpened, setCinemasOpened] = useState(false)
 
     data = data?.filter(el => el?.title.toLowerCase().includes(name?.toLowerCase()))
     console.log(name)
@@ -16,7 +18,14 @@ export default function Home() {
    
     return (
         <main className={s.mainWrapper}>
-            <Filter name={name} setName={setName}/>
+            <Filter 
+                name={name} 
+                setName={setName}
+                genresOpened={genresOpened}
+                setGenresOpened={setGenresOpened}
+                cinemasOpened={cinemasOpened}
+                setCinemasOpened={setCinemasOpened}
+                />
             <MovieList data={data} isLoading={isLoading} error={error}/>
         </main>
     )

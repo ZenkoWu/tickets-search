@@ -57,14 +57,18 @@ const Filter = ({name, setName, genresOpened, cinemasOpened, setCinemasOpened, s
                                 placeholder={el.placeholder}
                                 isSelect={el.isSelect}
                                 options={el.options}
+                                opened={el.opened}
+                                setOpened={el.setOpened}
                             />
                         )
                     }
+                
                 </div>
         </div>
     )
 }
 
+// сделать три компонетна с одинаковой подложкой 
 export default Filter;
 
 type TTextField = {
@@ -75,7 +79,7 @@ type TTextField = {
     isSelect: boolean,
     options?: string[],
     opened?: boolean,
-    setOpened?:() => void
+    setOpened?:(p: any) => any
 }
 const TextField = ({
     value,
@@ -90,34 +94,37 @@ const TextField = ({
     
     return (
         <div style={{paddingTop: '16px', }}>
-             {/* <form action="" className=''> */}
-                {/* <div className='pt-4'> */}
-                {/* <label htmlFor="">Жанр</label> */}
                 <p style={{padding: '4px 0'}}>{title}</p>
                 <div className='d-flex align-center rounded-8' 
                 style={{ border:'1px solid  #E1E3E6',  padding:'0px 16px',}}>
-                
+                 {options && setOpened ? 
+                    <>
                     <div 
-                        // type="select" 
-                        // value={value}
-                        contentEditable={!isSelect}
-                        data-placeholder={placeholder}
+                    style={{color: '#999FA6', padding:'10px 0px' ,
+                    width: '100%', alignItems:'center', fontSize:'14px'}}
+                    onClick={()=> setOpened?.((prev: any) => !prev)}
+                    >{value ?? placeholder}</div>
 
-                        // onFocus={()=> alert('e')}
-                        style={{color: '#999FA6', padding:'10px 0px' ,
-                         width: '100%', alignItems:'center', fontSize:'14px'}}
-                        onInput={(e: any)=> {
-                                console.log(e.currentTarget.textContent)
-                                setValue(e.currentTarget.textContent)
-                            }}
-                        //         // onClick={(e: any)=> setValue(e.current.value ?? '')}
-                    >{value}</div>
+                    <ArrowImage opened={opened!} color='grey' width={18}/>
+                    {opened &&
+                    <div>
+                        modal
+                    </div>
+                    }
+                    </> 
                     
-                    {options && <ArrowImage opened={false} color='grey' width={18}/>}
+                    :
+                    <input 
+                        type="text" 
+                        value={value}
+                        style={{height:'40px', color: '#999FA6',  
+                        borderRadius:'8px', border:'none', width: '100%', fontFamily: '__Roboto_40d704'}}
+                        onChange={(e)=> setValue(e.target.value)}
+                        placeholder={placeholder}
+                    />
+                }
                    
                 </div>
-                    
-            {/* </form> */}
         </div>
     )
 }

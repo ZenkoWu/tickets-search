@@ -21,13 +21,14 @@ const ButtonGroup = ({movieId, isRemovable}: {movieId: string, isRemovable: bool
     }, [movieId])
 
     const removeTicket = useCallback((movieId: string) => {
-        if(ticketCount > 1) {
+        if(!isRemovable || isRemovable && ticketCount > 1) {
             dispatch(cartActions.decrement(movieId))
         }else {
             setOpened(true)
         }
-
     }, [movieId, ticketCount])
+
+    
    
     return (
         <div className='d-flex justify-content-between align-start'>
@@ -40,7 +41,7 @@ const ButtonGroup = ({movieId, isRemovable}: {movieId: string, isRemovable: bool
             <Button 
                 src='/icons/plus.svg'
                 isDisabled={ticketCount === 30}
-                onClick={()=> addTicket(movieId)}
+                onClick={()=>  addTicket(movieId)}
             />
 
             {
@@ -57,10 +58,43 @@ const ButtonGroup = ({movieId, isRemovable}: {movieId: string, isRemovable: bool
                 />
             </div>
             }
-             {opened && createPortal(<DeleteTicket opened={opened} setOpened={setOpened} movieId={movieId}/>, document.body)}
+             {isRemovable && opened && createPortal(<DeleteTicket opened={opened} setOpened={setOpened} movieId={movieId}/>, document.body)}
             
         </div>
     )
 }
 
 export default ButtonGroup;
+
+
+const RemovableTicket = ({ticketCount, movieId}: any) => {
+    const [opened, setOpened] = useState(false)
+    const dispatch = useDispatch()
+
+    const removeTicket = useCallback((movieId: string) => {
+        if(ticketCount > 1 ) {
+            dispatch(cartActions.decrement(movieId))
+        }else {
+            setOpened(true)
+        }
+    }, [movieId, ticketCount])
+
+    return (
+        <div style={{paddingLeft:'24px'}}>
+        <Image
+        className='pointer'
+        src={'/icons/close.svg'}
+        alt="close"
+        width={20}
+        height={20}
+        priority
+        onClick={() => setOpened(prev => !prev)}
+            />
+
+{opened && createPortal(<DeleteTicket opened={opened} setOpened={setOpened} movieId={movieId}/>, document.body)}
+
+        </div>
+
+ 
+    )
+}

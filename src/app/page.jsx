@@ -3,9 +3,7 @@
 import Filter from './_components/Filter/Filter'
 import s from './page.module.css'
 import { useGetCinemaMoviesQuery, useGetMoviesQuery } from './redux/services/movieApi'
-import { useReducer, useState } from 'react'
-import { useGetCinemasQuery } from './redux/services/cinemaApi'
-import Preloader from './_components/Preloader/Preloader'
+import { useReducer } from 'react'
 import genresRu from './genresRu'
 import { MovieList } from './_components/MoviesList/MoviesList'
 

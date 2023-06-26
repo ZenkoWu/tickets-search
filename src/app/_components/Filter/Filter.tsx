@@ -90,56 +90,6 @@ type TTextField = {
     opened?: boolean,
     setOpened?:(p: any) => any
 }
-// const TextField = ({
-//     value,
-//     setValue,
-//     title, 
-//     placeholder, 
-//     isSelect, 
-//     options,
-//     opened,
-//     setOpened
-// }: TTextField) => {
-    
-//     return (
-//         <div style={{paddingTop: '16px', }}>
-//                 <p style={{padding: '4px 0'}}>{title}</p>
-//                 <div className='d-flex align-center rounded-8' 
-//                 style={{ border:'1px solid  #E1E3E6',  padding:'0px 16px',}}>
-//                  {options && setOpened ? 
-//                     <>
-//                     <div 
-//                     style={{color: '#999FA6', padding:'10px 0px' ,
-//                     width: '100%', alignItems:'center', fontSize:'14px'}}
-//                     onClick={()=> setOpened?.((prev: any) => !prev)}
-//                     >{value ?? placeholder}</div>
-
-//                     <ArrowImage opened={opened!} color='grey' width={18}/>
-//                     {opened &&
-//                     <div>
-//                         modal
-//                     </div>
-//                     }
-//                     </> 
-                    
-//                     :
-//                     <input 
-//                         type="text" 
-//                         value={value}
-//                         style={{height:'40px', color: '#999FA6',  
-//                         borderRadius:'8px', border:'none', width: '100%', fontFamily: '__Roboto_40d704'}}
-//                         onChange={(e)=> setValue(e.target.value)}
-//                         placeholder={placeholder}
-//                     />
-//                 }
-                   
-//                 </div>
-//         </div>
-//     )
-// }
-
-
-
 
 type TSelectField = {
     value: {

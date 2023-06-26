@@ -1,15 +1,6 @@
-import { moviesActions } from "@/app/redux/features/movies"
-import { useGetMoviesQuery } from "@/app/redux/services/movieApi"
-import { useDispatch, useSelector } from "react-redux"
+import genresRu from "../../genresRu"
 import FilmCard from "../FilmCard/FilmCard"
 import Preloader from "../Preloader/Preloader"
-
-export const genresRu = {
-    action: 'Боевик',
-    comedy: 'Комедия',
-    fantasy: 'Фэнтези',
-    horror: 'Ужасы',
-}
 
 export const MovieList = ({data, isLoading, error , status}) => { 
     if(isLoading || status == 'pending') {

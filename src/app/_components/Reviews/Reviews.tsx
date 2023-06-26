@@ -4,7 +4,7 @@ import Preloader from "../Preloader/Preloader"
 
 export const Reviews = ({movieId}: {movieId: string}) => {
     const {data, isLoading, error} = useGetReviewQuery(movieId)
-    console.log(data)
+    
     if(isLoading) {
         return <Preloader/>
     }

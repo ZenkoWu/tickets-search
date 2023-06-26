@@ -1,4 +1,4 @@
-import { OneQuestion, TOneQuestion } from "./OneQuestion/OneQuestion"
+import { OneQuestion } from "./OneQuestion/OneQuestion"
 
 const questionsAnswers = [
     {
@@ -21,17 +21,18 @@ const questionsAnswers = [
     },
 ]
 
-// {questionsAnswers}: {questionsAnswers: TOneQuestion[]}
 const FAQ = () => {
     return (
         <>
-           {questionsAnswers.map(q => 
-            <OneQuestion
-                key={q.question}
-                question={q.question} 
-                answer={q.answer}
-                />
-           )} 
+           {
+                questionsAnswers.map(q => 
+                    <OneQuestion
+                        key={q.question}
+                        question={q.question} 
+                        answer={q.answer}
+                    />
+                )
+           } 
         </>
     )
 }

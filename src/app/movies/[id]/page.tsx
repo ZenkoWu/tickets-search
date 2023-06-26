@@ -5,12 +5,12 @@ import s from './page.module.css'
 import ButtonGroup from "@/app/_components/ButtonGroup/ButtonGroup";
 import { Reviews } from "@/app/_components/Reviews/Reviews";
 import Preloader from "@/app/_components/Preloader/Preloader";
-import { genresRu } from "@/app/_components/MoviesList/MoviesList";
+import genresRu from '../../genresRu'
 
 type TFilmData = {
     description: string,
     director: string,
-    genre: string, // 'fantasy' | 'comedy' | 'horror' | 'action'
+    genre: 'fantasy' | 'comedy' | 'horror' | 'action'
     id: string,
     rating: number,
     releaseYear: number,
@@ -18,29 +18,34 @@ type TFilmData = {
     title: string,
     posterUrl: string,
 }
+type TFilmDescription = {
+    params: {
+        id: string
+    }
+}
+const FilmDescription = (props: TFilmDescription) => {
+    const {data, isLoading}= useGetMovieQuery(props.params.id)
 
-const FilmDescription = (props: any) => { 
-    const {data, isLoading, error} = useGetMovieQuery(props.params.id)
     if(isLoading) {
         return <Preloader/>
     }
-    // console.log(data)
+
     return ( 
         <div className='d-flex flex-column gap-24'>
             <div className="backgroundTemplate d-flex gap-24">
-                <img src={data.posterUrl} alt="" className={s.poster} />
-
+                <img src={data.posterUrl} alt="poster" className={s.poster} />
+                {/* //todo image */}
                 <div className='d-flex flex-column gap-24'>
-                    <div className='mainInfo'>
-                        <div className='d-flex justify-content-between' style={{marginBottom: '32px'}}>
+                    <div>
+                        <div className='d-flex justify-content-between mb-32'>
                             <h2 className='fw-600'>{data.title}</h2>
-                            <ButtonGroup movieId={data.id}/>
+                            <ButtonGroup movieId={data.id} isRemovable={false}/>
                         </div>
 
                         <div className='d-flex flex-column gap-24 fs20'>
                             <p>
                                 <span className='fw-600'>Жанр: </span> 
-                                {genresRu[data.genre as keyof typeof genresRu]}
+                                {genresRu[data.genre as TFilmData['genre']]}
                             </p>
                             <p>
                                 <span className='fw-600'>Год выпуска: </span> 
@@ -57,7 +62,7 @@ const FilmDescription = (props: any) => {
                         </div>
                     </div>
                     
-                    <div className='description d-flex flex-column gap-24'>
+                    <div className='d-flex flex-column gap-24'>
                         <p className='fs20 fw-600'>Описание</p>
                         <p>
                             {data.description}
@@ -67,7 +72,7 @@ const FilmDescription = (props: any) => {
                 </div> 
             </div>
             
-            <div className='reviews d-flex flex-column gap-24'>
+            <div className='d-flex flex-column gap-24'>
                 <Reviews movieId={data.id}/>
             </div>
         </div>
@@ -75,6 +80,3 @@ const FilmDescription = (props: any) => {
 }
 
 export default FilmDescription;
-
-
-// todo вынести в константы списки для мапа 

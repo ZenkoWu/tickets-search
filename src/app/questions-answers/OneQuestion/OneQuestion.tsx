@@ -2,6 +2,7 @@
 import s from './OneQuestion.module.css'
 import { useState } from 'react'
 import ArrowImage from '@/app/_components/ArrowImage/ArrowImage';
+
 export type TOneQuestion = {
     question: string,
     answer: string
@@ -9,12 +10,13 @@ export type TOneQuestion = {
 
 export const OneQuestion = ({question, answer}: TOneQuestion) => { 
     const [opened, setOpened] = useState<boolean>(false)
+    
     return ( 
         <div 
             className={`${s.container} backgroundTemplate`}
             onClick={() => setOpened(prev => !prev)}
         >
-            <div className={s.flex}>
+            <div className='d-flex justify-content-between'>
                 <div className={s.questionDiv}>
                     <h2>{question}</h2>
                     { 

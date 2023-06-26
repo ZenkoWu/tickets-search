@@ -2,7 +2,6 @@
 import Link from "next/link";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import s from './FilmCard.module.css'
-import { useSelector } from "react-redux";
 import Image from "next/image";
 import { useState } from "react";
 import DeleteTicket from "../Modal/DeleteTicket/DeleteTicket";

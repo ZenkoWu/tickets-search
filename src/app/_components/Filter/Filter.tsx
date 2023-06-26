@@ -2,8 +2,8 @@ import { createPortal } from 'react-dom';
 import ArrowImage from '../ArrowImage/ArrowImage';
 import s from './Filter.module.css'
 import { useEffect, useState } from 'react';
-import { genresRu } from '../MoviesList/MoviesList';
 import { useGetCinemasQuery } from '@/app/redux/services/cinemaApi';
+import genresRu from '../../genresRu';
 
 type TFilter ={
     name: string,

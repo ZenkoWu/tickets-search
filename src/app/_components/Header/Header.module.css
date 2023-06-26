@@ -8,11 +8,16 @@
     top: 0px;
     width: 100%;
    
-    color: white;
+    color: white; 
 
     background: #333333;
     
     font-style: normal;
     font-weight: 700;
     font-size: 2rem;
+}
+
+.tickets_count {
+    height: 28px; 
+    width: 28px;
 }

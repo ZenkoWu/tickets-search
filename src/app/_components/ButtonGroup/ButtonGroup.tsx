@@ -4,15 +4,16 @@ import Button from "./Button/Button";
 import { cartActions } from "@/app/redux/features/cart";
 import { useCallback, useState } from "react";
 
-import {selectProductAmount} from '../../redux/features/cart/selector'
+import {selectTicketCount} from '../../redux/features/cart/selector'
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import DeleteTicket from "../Modal/DeleteTicket/DeleteTicket";
+import { TState } from "@/app/redux/store";
 
 const ButtonGroup = ({movieId, isRemovable}: {movieId: string, isRemovable: boolean}) => {
     const [opened, setOpened] = useState(false)
 
-    let ticketCount = useSelector((state: any) => state.cart.tickets[movieId])
+    let ticketCount = useSelector((state: TState) => selectTicketCount(state, movieId as keyof TState['cart']['tickets']))
     const dispatch = useDispatch()
 
     const addTicket = useCallback((movieId: string) => {

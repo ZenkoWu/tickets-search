@@ -1,21 +1,15 @@
 'use client'
 import { useSelector } from "react-redux";
-import DeleteTicket from "../_components/Modal/DeleteTicket/DeleteTicket";
 import FilmCard from "../_components/FilmCard/FilmCard";
 import { TicketsCount } from "./TicketsCount/TicketsCount";
 import { useGetMovieQuery, useGetMoviesForCartQuery } from "../redux/services/movieApi";
 import Preloader from "../_components/Preloader/Preloader";
-import { genresRu } from "../_components/MoviesList/MoviesList";
-
-
-
+import { selectCartModule } from "../redux/features/cart/selector";
+import genresRu from "../genresRu";
 
 const Cart = () => {
-    const cart = useSelector((state) => state.cart)
-
-    const tickets = cart.tickets
-    const ticketsCount = cart.ticketsCount
-
+    const {tickets, ticketsCount} = useSelector((state) => selectCartModule(state))
+    
     const ids = Object.keys(tickets)
     const {data} = useGetMoviesForCartQuery(ids,  useGetMovieQuery)
     

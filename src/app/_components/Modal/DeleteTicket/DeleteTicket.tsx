@@ -3,9 +3,10 @@ import { cartActions } from "@/app/redux/features/cart";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import s from './DeleteTicket.module.css';
+import { TMovieId } from "@/app/redux/store";
 
 type TDeleteTicket = {
-    movieId: string,
+    movieId: TMovieId,
     opened: boolean,
     setOpened:(open: boolean) => void
 }
@@ -13,7 +14,7 @@ type TDeleteTicket = {
 const DeleteTicket = ({movieId, setOpened, opened}: TDeleteTicket) => {
     const dispatch = useDispatch()
     
-    const onAccept = (movieId:string) => {
+    const onAccept = (movieId: TMovieId) => {
         dispatch(cartActions.removeTicket(movieId))
     }
     const onCancel = () => {
@@ -44,7 +45,7 @@ const DeleteTicket = ({movieId, setOpened, opened}: TDeleteTicket) => {
                     />
                 </div>
 
-                <p style={{paddingBottom: '24px'}}>Вы уверены, что хотите удалить билет?</p>
+                <p className='pb-24'>Вы уверены, что хотите удалить билет?</p>
 
                 <div className='d-flex'>
                     <div 

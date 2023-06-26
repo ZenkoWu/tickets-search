@@ -6,7 +6,7 @@ const ArrowImage = ({opened, color, width}: {opened: boolean, color?: 'grey', wi
 
     const arrows = color === 'grey' ? greyArrows : blackArrows
     return (
-        <Image
+        <Image 
             className='pointer'
             src={opened ? arrows[0] : arrows[1]}
             alt="arrow"

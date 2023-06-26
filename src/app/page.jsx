@@ -44,41 +44,26 @@ const initialState = {
 export default function Home() {
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    let {data, isLoading : isLoading2, error} = useGetMoviesQuery()
-    console.log(data)
+    let {data, isLoading, error} = useGetMoviesQuery()
+   
     const onNameChange = (payload) => dispatch({type: 'setMovieName', payload})
+
+    // const onNameChange = (dispatch) => (payload) => dispatch({type: 'setMovieName', payload})
     
     const onGenreSet =(payload) => dispatch({type: 'setGenre', payload})
 
     const onCinemaSet =(payload) => dispatch({type: 'setCinema', payload})
     let movie = data;
-    let brrr = useGetCinemaMoviesQuery(state.cinema?.id)
-    console.log(brrr)
-    // if(state.cinema) {
+    
         let {data: data2, status} = useGetCinemaMoviesQuery(state.cinema?.id)
+        console.log({status})
         movie = data2;
-        // movie = movie?.filter(el => genresRu[el.genre] == state.genre)
-    // }
-    // if(status == 'pending') {
-    //     return <Preloader/>
-    // }
-
+        
      movie = movie?.filter(el =>el?.title.toLowerCase().includes(state.movieName?.toLowerCase().trim()))
 
     if(state.genre?.name && state.genre?.name != 'Не выбран') {
         movie = movie?.filter(el => genresRu[el.genre] == state.genre.name)
     }
-
-    // if(state.cinema) {
-    //     let {data} = useGetCinemaMoviesQuery(state.cinema)
-    //     // movie = movie?.filter(el => genresRu[el.genre] == state.genre)
-    // }
-    
-    // let {data: data2} = useGetCinemasQuery()
-    
-    //     console.log(data2)
-    
-    
    
     return (
         <main className={s.mainWrapper}>
@@ -92,7 +77,7 @@ export default function Home() {
                 />
             <MovieList
                 data={movie} 
-                isLoading={isLoading2} 
+                isLoading={isLoading} 
                 error={error}
                 status={status}
             />

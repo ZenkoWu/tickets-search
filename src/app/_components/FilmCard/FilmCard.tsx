@@ -3,9 +3,6 @@ import Link from "next/link";
 import ButtonGroup from "../ButtonGroup/ButtonGroup";
 import s from './FilmCard.module.css'
 import Image from "next/image";
-import { useState } from "react";
-import DeleteTicket from "../Modal/DeleteTicket/DeleteTicket";
-import { createPortal } from "react-dom";
 
 type TFilmCard = {
     id: string,
@@ -13,39 +10,38 @@ type TFilmCard = {
     posterUrl: string,
     genre: string,
     isRemovable: boolean
-
 }
+
 const FilmCard = ({title, posterUrl, genre, id, isRemovable}: TFilmCard) => {
-    const [opened, setOpened] = useState(false)
-    
     return (
         <div className={`backgroundTemplate d-flex align-start justify-content-between ${s.card}`}>
-                <div className="d-flex align-start"> 
-                    <img src={posterUrl} alt={title} className={s.img}/>
-                    <div className={s.title}>
-                    <Link href={`/movies/${id}`} style={{width:'100%', color:'black'}}>
+            <div className="d-flex align-start"> 
+
+                <Image
+                    src={posterUrl}
+                    alt={title}
+                    className={s.img}
+                    width={100}
+                    height={120}
+                />
+
+                <div className={s.title}>
+                    <Link href={`/movies/${id}`} className='w-100 text-dark'>
                         <p className="fw-600 fs20">{title}</p>
-                        </Link>  
-                        <p className={s.genre}>{genre}</p>
-                    </div>
+                    </Link>  
+                    <p className={s.genre}>{genre}</p>
                 </div>
+            </div>
+
             <div className="d-flex gap-24 align-center">
-            <ButtonGroup movieId={id} isRemovable={isRemovable}/>
-                {/* { isRemovable &&
-                    <Image
-                        className='pointer'
-                        src={'/icons/close.svg'}
-                        alt="close"
-                        width={20}
-                        height={20}
-                        priority
-                        onClick={() => setOpened(prev => !prev)}
-                    />
-                } */}
-                {/* {opened && createPortal(<DeleteTicket opened={opened} setOpened={setOpened} movieId={id}/>, document.body)} */}
+                <ButtonGroup 
+                    movieId={id} 
+                    isRemovable={isRemovable}
+                />
             </div>
         </div>
     )
 }
 export default FilmCard;
+
 // todo пересмотреть пораталы!!!

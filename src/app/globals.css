@@ -6,6 +6,7 @@ html, body {
 
 :root {
   font-size: 16px;
+  font-family: __Roboto_40d704;
 }
 
 *, :after, :before {
@@ -21,9 +22,6 @@ a {
   color: white;
   padding: 0;
 }
-/* a:hover {
-  color: ghostwhite;
-} */
 
 button {
   border: none;
@@ -52,13 +50,12 @@ i.fa {
   background: #e3e3e3;
 } 
 
-.card {
+/* .card {
   padding: 20px;
   border-radius: 15px;
   background: white;
-  /* height: 100px; */
   margin-bottom: 15px;
-}
+} */
 
 .backgroundTemplate {
   background: #FFFFFF;
@@ -122,20 +119,29 @@ img {
 }
 
 .orange-button {
-  /* display: inline-block; */
   border-radius: 4px;
   background-color: #FF5500;
-  /* padding: 0 4px; */
 }
 
 .pb-16 {
   padding-bottom: 16px;
 }
 
+.pb-24 {
+  padding-bottom: 24px;
+}
+.ps-24 {
+  padding-left: 24px;
+}
+.px-8 {
+  padding: 0 8px;
+}
 .text-white {
   color: white;
 }
-
+.text-dark {
+  color: black;
+}
 .mt-16 {
   margin-top: 16px;
 }
@@ -158,4 +164,18 @@ img {
 
 .text-center {
   text-align: center;
+}
+.h-100 {
+  height: 100%;
+}
+
+.w-100 {
+  width: 100%;
+}
+.border-none {
+  border: none;
+}
+
+.py-8 {
+  padding: 8px 0;
 }

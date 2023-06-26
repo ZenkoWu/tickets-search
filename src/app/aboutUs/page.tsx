@@ -1,4 +1,4 @@
-import s from './AboutUs.module.css'
+
 const AboutUs = () => {
     return (
         <div className={`lh-24 backgroundTemplate`}>
@@ -19,7 +19,7 @@ const AboutUs = () => {
                 40 % акций принадлежало её совладельцу — французской компании ООО AlloCiné. 15 октября 2013 
                 года сервис купила компания «Яндекс» (размер сделки — $80 млн, около 2,6 млрд рублей на то 
                 время).
-            </p>
+            </p> 
         </div>
     )
 }

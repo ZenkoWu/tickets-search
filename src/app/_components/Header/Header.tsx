@@ -12,7 +12,7 @@ export const Header = () => {
     return (
         <header className={`${s.header} d-flex justify-content-between align-center`}>
             <Link href='/'>Билетопоиск</Link>
-            <div className='d-flex align-center gap-8'>
+            <div className='d-flex align-center gap-8'> 
                 {
                     ticketsCount > 0 &&
                     <div className={`

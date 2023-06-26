@@ -46,4 +46,5 @@ const cartSlice = createSlice({
 
 export const cartReducer = cartSlice.reducer;
 export const cartActions = cartSlice.actions; 
+
 // в слайсе есть и экшены и редьюсеры - удобная форма создания всего и сразу 

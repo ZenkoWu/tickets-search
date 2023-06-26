@@ -10,13 +10,13 @@ export const movieApi = createApi({
         getCinemaMovies: builder.query({query: (cinemaId) => `${API_ROUTES.cinemaMovies}${cinemaId}`}),
         getMoviesForCart: builder.query({
             async queryFn(ids, _queryApi, _extraOptions, fetchWithBQ) {
-              const response = await Promise.all(
-                ids.map((movieId) => fetchWithBQ(`${API_ROUTES.movieById}${movieId}`))
-              );
-              
-              return response[0].data
-                ? { data: response.map((movie) => movie.data)}
-                : { error: response[0].error};
+                const response = await Promise.all(
+                    ids.map((movieId) => fetchWithBQ(`${API_ROUTES.movieById}${movieId}`))
+                );
+                
+                return response[0].data
+                    ? { data: response.map((movie) => movie.data)}
+                    : { error: response[0].error};
             },
           })
 

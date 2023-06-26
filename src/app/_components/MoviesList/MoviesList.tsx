@@ -1,8 +1,16 @@
+import { TFilmData } from "@/app/movies/[id]/page"
 import genresRu from "../../genresRu"
 import FilmCard from "../FilmCard/FilmCard"
 import Preloader from "../Preloader/Preloader"
 
-export const MovieList = ({data, isLoading, error , status}) => { 
+type TMovieList = {
+    data: TFilmData[], 
+    isLoading: boolean, 
+    error: boolean, 
+    status: 'pending' | 'fulfilled'
+}
+ 
+export const MovieList = ({data, isLoading, error, status}: TMovieList) => { 
     if(isLoading || status == 'pending') {
         return <Preloader/>
     }
@@ -13,7 +21,7 @@ export const MovieList = ({data, isLoading, error , status}) => {
     return (
         <div className='d-flex flex-column gap-16' >
             {
-                data && data.map((el) => 
+                data && data.map((el: TFilmData) => 
                     <FilmCard
                         isRemovable={false}
                         key={el.id}
@@ -27,5 +35,3 @@ export const MovieList = ({data, isLoading, error , status}) => {
         </div>
     )
 }
-
-//todo создать компонент муви лист с контейнером для главной и корзины!!!!

@@ -8,9 +8,10 @@ import { reviewsApi } from './services/reviewsApi'
 export type TState = {
     cart: {
         ticketsCount: number,
-        tickets: {key: number}[]
+        tickets: {[key: string]: number}
     }
 }
+export type TMovieId = string
 
 export const store = configureStore({
     reducer: {
@@ -26,5 +27,3 @@ export const store = configureStore({
         logger
     ])
 })
-
-console.log(store.getState())

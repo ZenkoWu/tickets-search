@@ -6,8 +6,9 @@ import ButtonGroup from "@/app/_components/ButtonGroup/ButtonGroup";
 import { Reviews } from "@/app/_components/Reviews/Reviews";
 import Preloader from "@/app/_components/Preloader/Preloader";
 import genresRu from '../../genresRu'
+import Image from "next/image";
 
-type TFilmData = {
+export type TFilmData = {
     description: string,
     director: string,
     genre: 'fantasy' | 'comedy' | 'horror' | 'action'
@@ -24,7 +25,7 @@ type TFilmDescription = {
     }
 }
 const FilmDescription = (props: TFilmDescription) => {
-    const {data, isLoading}= useGetMovieQuery(props.params.id)
+    const {data, isLoading} = useGetMovieQuery(props.params.id)
 
     if(isLoading) {
         return <Preloader/>
@@ -33,8 +34,14 @@ const FilmDescription = (props: TFilmDescription) => {
     return ( 
         <div className='d-flex flex-column gap-24'>
             <div className="backgroundTemplate d-flex gap-24">
-                <img src={data.posterUrl} alt="poster" className={s.poster} />
-                {/* //todo image */}
+                <Image
+                    src={data.posterUrl}
+                    alt="poster"
+                    className={s.poster}
+                    width={400}
+                    height={500}
+                />
+            
                 <div className='d-flex flex-column gap-24'>
                     <div>
                         <div className='d-flex justify-content-between mb-32'>

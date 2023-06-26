@@ -1,19 +1,18 @@
 'use client'
 import { useDispatch, useSelector } from "react-redux";
 import Button from "./Button/Button";
-import { cartActions } from "@/app/redux/features/cart";
+import { cartActions } from "../../redux/features/cart";
 import { useCallback, useState } from "react";
-
 import {selectTicketCount} from '../../redux/features/cart/selector'
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import DeleteTicket from "../Modal/DeleteTicket/DeleteTicket";
-import { TState } from "@/app/redux/store";
+import { TMovieId, TState } from "../../redux/store";
 
-const ButtonGroup = ({movieId, isRemovable}: {movieId: string, isRemovable: boolean}) => {
+const ButtonGroup = ({movieId, isRemovable}: {movieId: TMovieId, isRemovable: boolean}) => {
     const [opened, setOpened] = useState(false)
 
-    let ticketCount = useSelector((state: TState) => selectTicketCount(state, movieId as keyof TState['cart']['tickets']))
+    const ticketCount = useSelector((state: TState) => selectTicketCount(state, movieId))
     const dispatch = useDispatch()
 
     const addTicket = useCallback((movieId: string) => {
@@ -29,8 +28,6 @@ const ButtonGroup = ({movieId, isRemovable}: {movieId: string, isRemovable: bool
         }
     }, [movieId, ticketCount])
 
-    
-   
     return (
         <div className='d-flex justify-content-between align-start'>
             <Button
@@ -38,7 +35,7 @@ const ButtonGroup = ({movieId, isRemovable}: {movieId: string, isRemovable: bool
                 isDisabled={!ticketCount}
                 onClick={() => removeTicket(movieId)}
             />
-            <p className='fw-600' style={{padding: '0 8px', color: 'black'}}>{ticketCount ?? 0}</p>
+            <p className='fw-600 text-dark px-8'>{ticketCount ?? 0}</p>
             <Button 
                 src='/icons/plus.svg'
                 isDisabled={ticketCount === 30}
@@ -47,55 +44,33 @@ const ButtonGroup = ({movieId, isRemovable}: {movieId: string, isRemovable: bool
 
             {
                 isRemovable && 
-                <div style={{paddingLeft:'24px'}}>
+                <div className='ps-24'>
                     <Image
-                    className='pointer'
-                    src={'/icons/close.svg'}
-                    alt="close"
-                    width={20}
-                    height={20}
-                    priority
-                    onClick={() => setOpened(prev => !prev)}
-                />
+                        className='pointer'
+                        src={'/icons/close.svg'}
+                        alt="close"
+                        width={20}
+                        height={20}
+                        priority
+                        onClick={() => setOpened(prev => !prev)}
+                    />
             </div>
             }
-             {isRemovable && opened && createPortal(<DeleteTicket opened={opened} setOpened={setOpened} movieId={movieId}/>, document.body)}
-            
+
+            {
+                isRemovable && 
+                opened && 
+                createPortal(
+                    <DeleteTicket 
+                        opened={opened} 
+                        setOpened={setOpened} 
+                        movieId={movieId}
+                    />, 
+                    document.body
+                )
+            } 
         </div>
     )
 }
 
 export default ButtonGroup;
-
-
-const RemovableTicket = ({ticketCount, movieId}: any) => {
-    const [opened, setOpened] = useState(false)
-    const dispatch = useDispatch()
-
-    const removeTicket = useCallback((movieId: string) => {
-        if(ticketCount > 1 ) {
-            dispatch(cartActions.decrement(movieId))
-        }else {
-            setOpened(true)
-        }
-    }, [movieId, ticketCount])
-
-    return (
-        <div style={{paddingLeft:'24px'}}>
-        <Image
-        className='pointer'
-        src={'/icons/close.svg'}
-        alt="close"
-        width={20}
-        height={20}
-        priority
-        onClick={() => setOpened(prev => !prev)}
-            />
-
-{opened && createPortal(<DeleteTicket opened={opened} setOpened={setOpened} movieId={movieId}/>, document.body)}
-
-        </div>
-
- 
-    )
-}

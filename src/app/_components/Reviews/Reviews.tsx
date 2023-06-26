@@ -7,9 +7,10 @@ export const Reviews = ({movieId}: {movieId: string}) => {
     
     if(isLoading) {
         return <Preloader/>
-    }
+    } 
+    
     if(!data || error) {
-        return <div>Данные не найдены</div>
+        return <div>Отзывов пока нет</div>
     }
     return (
         <div className='d-flex flex-column gap-24'>

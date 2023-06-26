@@ -1,9 +1,5 @@
 .filter {
-    /* width: 408px; */
-    /* display: flex; 
-    flex-direction: column;  */ 
     height: calc(80vh);
     position: sticky;
     top: calc(10vh + 24px);  /*18vh - hug 10- normal*/
-    
 }

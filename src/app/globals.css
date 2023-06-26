@@ -50,13 +50,6 @@ i.fa {
   background: #e3e3e3;
 } 
 
-/* .card {
-  padding: 20px;
-  border-radius: 15px;
-  background: white;
-  margin-bottom: 15px;
-} */
-
 .backgroundTemplate {
   background: #FFFFFF;
   border-radius: 8px;
@@ -178,4 +171,12 @@ img {
 
 .py-8 {
   padding: 8px 0;
+}
+
+.text_field {
+  color: rgba(27, 31, 35, 0.7)
+}
+
+.p-relative {
+  position: relative;
 }

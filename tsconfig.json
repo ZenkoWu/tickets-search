@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/redux/StoreProvider.tsx", "src/app/page.jsx", "src/app/_components/MoviesList/MoviesList.tsx", "src/app/cart/page.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/redux/StoreProvider.tsx", "src/app/page.jsx", "src/app/_components/MoviesList/MoviesList.tsx", "src/app/cart/page.tsx", "src/app/_components/Filter/Filter.jsx"],
   "exclude": ["node_modules"]
 }

@@ -39,7 +39,7 @@ const initialState = {
 }
 export default function Home() {
     const [state, dispatch] = useReducer(reducer, initialState)
-    console.log(state.movieName)
+    
     return (
         <main className={s.mainWrapper}>
             <Filter 

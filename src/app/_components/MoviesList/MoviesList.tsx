@@ -14,16 +14,16 @@ type TMovieList = {
  
 export const MovieList = ({ state}: TMovieList) => {
     // let {data, isLoading, error} = useGetMoviesQuery('') 
-    let {data: data, status, isError} = useGetCinemaMoviesQuery(state.cinema?.id) 
+    let {data: movie, status, isError} = useGetCinemaMoviesQuery(state.cinema?.id) 
     
     if( status == 'pending') {
         return <Preloader/>
     }
-    if(!data || isError) {
+    if(!movie || isError) {
         return <div>Данные не найдены</div>
     }
 
-    let movie = data;
+    // let movie = data;
     
     // if(data2 && state.cinema?.name != 'Не выбран') {
     //     movie = data2 

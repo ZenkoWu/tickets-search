@@ -23,7 +23,12 @@ const questionsAnswers = [
 
 const FAQ = () => {
     return (
-        <>
+        <>  
+            <div className={`backgroundTemplate`}>
+                <div className='d-flex justify-content-between'>
+                    <h1>Вопросы-ответы</h1>
+                </div>
+            </div>
            {
                 questionsAnswers.map(q => 
                     <OneQuestion

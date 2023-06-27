@@ -10,7 +10,7 @@ type TSelectField = {
         id: string,
         name: string
     }, 
-    setValue: (value: string) => void,
+    setValue: (value: {id: string, name: string}) => void,
     title: string,
     placeholder: string,
     options: {
@@ -33,7 +33,7 @@ export const SelectField = ({
 
     useEffect(() => {
         setDomReady(true)
-    }, [document.getElementById(title)!])
+    }, [domReady])
 
     return (
         <div id={title} className='p-relative'>

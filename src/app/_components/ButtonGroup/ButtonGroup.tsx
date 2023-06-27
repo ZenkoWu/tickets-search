@@ -26,7 +26,7 @@ const ButtonGroup = ({movieId, isRemovable}: {movieId: TMovieId, isRemovable: bo
         }else {
             setOpened(true)
         }
-    }, [movieId, ticketCount])
+    }, [movieId, ticketCount, isRemovable])
 
     return (
         <div className='d-flex justify-content-between align-start'>
